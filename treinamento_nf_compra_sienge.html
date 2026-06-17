@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treinamento Sienge ERP | Nota Fiscal de Compra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --red:#c9343b;
+      --red-dark:#a9262d;
+      --black:#101114;
+      --gray:#6b7280;
+      --line:#e7e7ea;
+      --soft:#f7f7f8;
+      --white:#ffffff;
+      --green:#16a34a;
+      --yellow:#f59e0b;
+      --shadow:0 18px 50px rgba(16,17,20,.10);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#fff 0%,#f5f5f6 100%);color:var(--black)}
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{max-width:1220px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:14px}.brand img{height:54px}.brand small{display:block;color:var(--gray);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:11px}
+    .links{display:flex;gap:10px;flex-wrap:wrap}.links a{color:var(--black);text-decoration:none;font-size:13px;font-weight:800;padding:10px 13px;border-radius:999px}.links a:hover{background:var(--soft);color:var(--red)}
+    .hero{max-width:1220px;margin:30px auto 0;padding:28px 22px 10px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);padding:9px 14px;border-radius:999px;color:var(--red);font-weight:900;box-shadow:0 8px 24px rgba(16,17,20,.06)}
+    h1{font-size:clamp(36px,5vw,68px);line-height:.98;margin:18px 0 18px;letter-spacing:-.06em}.highlight{color:var(--red)}
+    .lead{font-size:18px;line-height:1.65;color:#454851;max-width:720px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn{border:0;border-radius:16px;padding:14px 18px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:.25s}.btn-primary{background:var(--red);color:white;box-shadow:0 14px 30px rgba(201,52,59,.25)}.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px)}.btn-light{background:white;color:var(--black);border:1px solid var(--line)}.btn-light:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .hero-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}.video-wrap{position:relative;overflow:hidden;border-radius:20px;background:#17181c;aspect-ratio:16/9}.video-wrap iframe,.video-wrap video{width:100%;height:100%;border:0;display:none}.video-placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:white;padding:26px;background:radial-gradient(circle at 30% 20%,rgba(201,52,59,.55),transparent 35%),linear-gradient(135deg,#101114,#2b2d33)}.play{width:74px;height:74px;border-radius:50%;background:var(--red);display:grid;place-items:center;margin:auto;font-size:30px;box-shadow:0 14px 35px rgba(201,52,59,.45)}
+    .section{max-width:1220px;margin:32px auto;padding:0 22px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}.section-title h2{font-size:32px;margin:0;letter-spacing:-.04em}.section-title p{margin:8px 0 0;color:var(--gray);line-height:1.5}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:white;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 10px 28px rgba(16,17,20,.05)}.card h3{margin:0 0 10px;font-size:18px}.card p,.card li{color:#555966;line-height:1.55;font-size:14px}.icon{width:42px;height:42px;border-radius:14px;background:#fff0f1;color:var(--red);display:grid;place-items:center;font-weight:900;margin-bottom:14px}.timeline{display:grid;gap:14px}.step{display:grid;grid-template-columns:58px 1fr auto;gap:16px;align-items:start;background:white;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 10px 26px rgba(16,17,20,.04)}.num{width:46px;height:46px;border-radius:16px;background:var(--black);color:#fff;display:grid;place-items:center;font-weight:900}.step h3{margin:0 0 6px}.step p{margin:0;color:#555966;line-height:1.55}.tag{font-size:12px;font-weight:900;color:var(--red);background:#fff0f1;border-radius:999px;padding:8px 10px;white-space:nowrap}
+    .panel{display:grid;grid-template-columns:1fr 1fr;gap:16px}.checklist label{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:16px;margin-bottom:10px;background:#fff}.checklist input{width:20px;height:20px;accent-color:var(--red)}.progress-box{background:linear-gradient(135deg,#101114,#2b2d33);color:#fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}.progress-line{height:14px;background:rgba(255,255,255,.16);border-radius:999px;overflow:hidden;margin:16px 0}.progress-fill{height:100%;width:0;background:var(--red);border-radius:999px;transition:.35s}.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.kpi div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px}.kpi strong{font-size:24px;display:block}.attention{border-left:5px solid var(--red);background:#fff;border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(16,17,20,.05)}.attention h3{margin-top:0}.quiz{display:grid;gap:12px}.question{background:white;border:1px solid var(--line);border-radius:18px;padding:16px}.question button{margin:6px 6px 0 0;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;cursor:pointer;font-weight:800}.question button.correct{background:#eaf8ef;border-color:#bce8c8;color:var(--green)}.question button.wrong{background:#fff0f1;border-color:#ffc7cc;color:var(--red)}
+    footer{margin-top:40px;background:var(--black);color:white;padding:28px 22px;text-align:center}footer img{height:48px;filter:brightness(0) invert(1);opacity:.9}footer p{color:#c7c9d1}
+    @media(max-width:900px){.hero,.panel{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.links{display:none}.step{grid-template-columns:48px 1fr}.tag{grid-column:2}.brand img{height:44px}}
+    @media print{.topbar,.hero-actions,.quiz,.btn{display:none}.hero,.grid,.panel{display:block}.card,.step,.attention,.progress-box{break-inside:avoid;margin-bottom:12px}body{background:white}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand">
+        <img src="data:image/png;base64,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" alt="Área Incrível Incorporadora">
+        <div><strong>Treinamento Sienge ERP</strong><small>Nota Fiscal de Compra</small></div>
+      </div>
+      <div class="links"><a href="#video">Vídeo</a><a href="#fluxo">Passo a passo</a><a href="#devolucao">Devolução</a><a href="#checklist">Checklist</a><a href="#quiz">Quiz</a></div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="badge">● Área Incrível | Suprimentos</span>
+        <h1>Cadastro de <span class="highlight">Nota Fiscal de Compra</span> no Sienge</h1>
+        <p class="lead">Uma página de treinamento objetiva, humanizada e prática para orientar o usuário no lançamento correto da NF-e, vínculo com pedidos, insumos, financeiro e controle de devoluções.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#video">Assistir treinamento</a>
+          <button class="btn btn-light" onclick="window.print()">Imprimir material</button>
+        </div>
+      </div>
+      <aside class="hero-card" id="video">
+        <div class="video-wrap">
+          <iframe id="videoFrame" title="Vídeo explicativo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <video id="videoLocal" controls></video>
+          <div class="video-placeholder" id="videoPlaceholder">
+            <div><div class="play">▶</div><h3>Vídeo explicativo do processo</h3><p>Substitua a variável <b>videoUrl</b> no JavaScript pelo link do YouTube ou arquivo MP4.</p></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <div class="card"><div class="icon">01</div><h3>Precisão fiscal</h3><p>O uso da chave de acesso reduz erro de digitação e mantém os dados compatíveis com a NF-e emitida pelo fornecedor.</p></div>
+        <div class="card"><div class="icon">02</div><h3>Controle de compras</h3><p>A nota pode atender pedidos de compra, garantindo rastreabilidade entre o solicitado, recebido e faturado.</p></div>
+        <div class="card"><div class="icon">03</div><h3>Previsão financeira</h3><p>Os títulos da nota alimentam o contas a pagar e fortalecem o controle de fluxo de caixa da obra.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="fluxo">
+      <div class="section-title"><div><h2>Passo a passo do cadastro</h2><p>Siga a sequência abaixo para evitar notas incompletas, divergências e retrabalho.</p></div></div>
+      <div class="timeline" id="steps"></div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <div class="attention">
+          <h3>Cuidados antes de salvar</h3>
+          <p>Confirme se a NF-e foi recepcionada, se o documento fiscal está configurado como modelo 55, se os insumos estão vinculados e se existe pelo menos um título de pagamento cadastrado.</p>
+          <p><b>Atenção:</b> notas incompletas não devem seguir o fluxo. Todos os itens da NF-e precisam estar relacionados a um insumo.</p>
+        </div>
+        <div class="attention">
+          <h3>Distorções entre pedido e nota</h3>
+          <p>Utilize o relatório de distorções para verificar diferenças de quantidade, valor ou condição entre o pedido de compra e a nota fiscal recebida.</p>
+          <p>Esse controle evita pagamento incorreto, divergência de estoque e inconsistência gerencial.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="devolucao">
+      <div class="section-title"><div><h2>Processo de devolução</h2><p>Use quando houver necessidade de devolver mercadorias e ajustar estoque/financeiro.</p></div></div>
+      <div class="grid">
+        <div class="card"><div class="icon">A</div><h3>Configurar documento</h3><p>Acesse <b>Apoio &gt; Documentos &gt; Novo</b>, desmarque Permitir Pagamento e Permitir Recebimento, marque Documento de Devolução, informe código, descrição e dados fiscais.</p></div>
+        <div class="card"><div class="icon">B</div><h3>Registrar devolução</h3><p>Acesse <b>Suprimentos &gt; Compras &gt; Notas Fiscais de Compra &gt; Devoluções</b>, selecione a nota e informe documento, número, tipo de movimento e data.</p></div>
+        <div class="card"><div class="icon">C</div><h3>Baixar valores</h3><p>Informe quantidades devolvidas e confira parcelas em aberto. Se a nota não foi paga, use “Sugerir valores a baixar”. Se já foi paga, siga o fluxo de devolução de nota paga.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="checklist">
+      <div class="section-title"><div><h2>Checklist de execução</h2><p>Marque cada etapa concluída para acompanhar a evolução do treinamento.</p></div></div>
+      <div class="panel">
+        <div class="checklist" id="checklistBox"></div>
+        <div class="progress-box">
+          <h3>Progresso do usuário</h3>
+          <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="kpi"><div><strong id="done">0</strong><span>Concluídos</span></div><div><strong id="pending">0</strong><span>Pendentes</span></div><div><strong id="percent">0%</strong><span>Aderência</span></div></div>
+          <p id="progressMsg">Comece marcando as etapas executadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quiz">
+      <div class="section-title"><div><h2>Validação rápida</h2><p>Responda para fixar os pontos críticos do processo.</p></div></div>
+      <div class="quiz" id="quizBox"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>Área Incrível Incorporadora</b></p>
+    <p>Treinamento interno | Sienge ERP | Cadastro de Nota Fiscal de Compra</p>
+    </footer>
+
+  <script>
+    const videoUrl = ""; // Ex.: https://youtu.be/ID_DO_VIDEO ou videos/nota-fiscal-compra.mp4
+
+    const steps = [
+      ["Acessar a tela", "Menu: Suprimentos > Compras > Notas Fiscais de Compra > Cadastros. Clique em NOVO.", "Entrada"],
+      ["Selecionar documento", "Escolha o documento fiscal configurado como modelo fiscal nº 55 para NF-e.", "Fiscal"],
+      ["Informar chave de acesso", "Digite a chave manualmente, use leitor digital ou informe o número da nota para localizar a chave.", "NF-e"],
+      ["Salvar dados principais", "Confira fornecedor, número, série, data, valor total e dados fiscais antes de avançar.", "Conferência"],
+      ["Vincular insumos", "Na aba Insumos, relacione os produtos da nota aos insumos da obra, manualmente ou atendendo Pedido de Compra.", "Obra"],
+      ["Conferir títulos", "Na aba Títulos, valide condição de pagamento, parcelas, vencimentos e valores.", "Financeiro"],
+      ["Informar centro de custo", "Garanta que a previsão financeira esteja apropriada corretamente no centro de custo da obra.", "Controle"],
+      ["Validar consistência", "A nota deve possuir título, insumo associado e todos os itens da NF-e relacionados antes de seguir o fluxo.", "Finalização"]
+    ];
+
+    const checks = [
+      "NF-e recepcionada no sistema antes do cadastro.",
+      "Documento fiscal modelo 55 selecionado corretamente.",
+      "Chave de acesso informada e validada.",
+      "Fornecedor, número, série, data e valor conferidos.",
+      "Insumos vinculados aos itens da nota ou pedido atendido.",
+      "Títulos e parcelas conferidos no financeiro.",
+      "Centro de custo informado corretamente.",
+      "Relatório de distorções consultado quando houver pedido de compra."
+    ];
+
+    const quiz = [
+      {q:"Uma nota fiscal completa precisa ter:", a:"Título, insumo associado e itens relacionados", o:["Apenas chave de acesso", "Título, insumo associado e itens relacionados", "Somente fornecedor cadastrado"]},
+      {q:"Onde conferir parcelas e condição de pagamento?", a:"Aba Títulos", o:["Aba Títulos", "Aba Observações", "Aba Anexos"]},
+      {q:"Para devolver mercadoria, o caminho correto é:", a:"Notas Fiscais de Compra > Devoluções", o:["Pedidos > Aprovação", "Notas Fiscais de Compra > Devoluções", "Financeiro > Extratos"]}
+    ];
+
+    function loadVideo(){
+      const frame=document.getElementById('videoFrame'), local=document.getElementById('videoLocal'), ph=document.getElementById('videoPlaceholder');
+      if(!videoUrl) return;
+      if(videoUrl.includes('youtube')||videoUrl.includes('youtu.be')){
+        const id = videoUrl.includes('youtu.be') ? videoUrl.split('/').pop().split('?')[0] : new URL(videoUrl).searchParams.get('v') || videoUrl.split('/embed/').pop();
+        frame.src = `https://www.youtube.com/embed/${id}`; frame.style.display='block'; ph.style.display='none';
+      } else { local.src=videoUrl; local.style.display='block'; ph.style.display='none'; }
+    }
+
+    document.getElementById('steps').innerHTML = steps.map((s,i)=>`<article class="step"><div class="num">${String(i+1).padStart(2,'0')}</div><div><h3>${s[0]}</h3><p>${s[1]}</p></div><span class="tag">${s[2]}</span></article>`).join('');
+
+    const checklistBox=document.getElementById('checklistBox');
+    checklistBox.innerHTML = checks.map((c,i)=>`<label><input type="checkbox" onchange="updateProgress()"><span>${c}</span></label>`).join('');
+    function updateProgress(){
+      const inputs=[...document.querySelectorAll('#checklistBox input')], done=inputs.filter(i=>i.checked).length, total=inputs.length, pct=Math.round(done/total*100);
+      document.getElementById('done').textContent=done; document.getElementById('pending').textContent=total-done; document.getElementById('percent').textContent=pct+'%'; document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressMsg').textContent = pct===100 ? 'Processo validado. A nota está pronta para seguir com segurança.' : pct>=60 ? 'Boa evolução. Revise os pontos pendentes antes de finalizar.' : 'Atenção: ainda existem etapas importantes pendentes.';
+    }
+    updateProgress();
+
+    document.getElementById('quizBox').innerHTML = quiz.map((item,qi)=>`<div class="question"><strong>${qi+1}. ${item.q}</strong><br>${item.o.map(opt=>`<button onclick="answer(this,'${opt===item.a}')">${opt}</button>`).join('')}</div>`).join('');
+    function answer(btn,ok){btn.classList.add(ok==='true'?'correct':'wrong');}
+    loadVideo();
+  </script>
+</body>
+</html>
